@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Results</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Processing Results</h1>
+        <p><strong>Input Text:</strong> {{ text }}</p>
+        <p><strong>Cleaned Text:</strong> {{ cleaned_text }}</p>
+        <p><strong>Hashtags:</strong> {{ ", ".join(hashtags) }}</p>
+        
+        {% if is_disaster %}
+        <p class="alert alert-danger">🚨 Disaster has been detected! 🚨</p>
+        <h2>Named Entities</h2>
+        <table class="table">
+            <tr>
+                <th>Entity</th>
+                <th>Label</th>
+            </tr>
+            {% for entity, label in ner_entities %}
+            <tr>
+                <td>{{ entity }}</td>
+                <td>{{ label }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Coordinates</h2>
+        <table class="table">
+            <tr>
+                <th>Entity</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+            {% for coord in coordinates %}
+            <tr>
+                <td>{{ coord.entity }}</td>
+                <td>{{ coord.latitude }}</td>
+                <td>{{ coord.longitude }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class="alert alert-success">✅ No disaster has been detected.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text and Image Processor</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Text and Image Processor</h1>
+        <form action="/process_input" method="post" class="form">
+            <label for="text">Enter Text:</label>
+            <textarea id="text" name="text" rows="4" required></textarea>
+            
+            <label for="image_url">Enter Image URL:</label>
+            <input type="url" id="image_url" name="image_url" required>
+            
+            <button type="submit" class="button">Process</button>
+        </form>
+    </div>
+</body>
+</html>
