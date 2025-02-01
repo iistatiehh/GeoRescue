@@ -10,34 +10,27 @@ from fastapi.templating import Jinja2Templates
 from qnlpmodel import model_load, load_vectorier
 import os
 
-# FastAPI app initialization
 app = FastAPI()
 
-# Mount static files for CSS/JS (if needed in the future)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Jinja2 Templates directory
 templates = Jinja2Templates(directory="templates")
 
-# Environment variables for sensitive tokens
 PICARTA_API_TOKEN = os.getenv("PICARTA_API_TOKEN", "U7XIEFTM9APVVD1IR4C6")
 GEONAMES_USERNAME = os.getenv("GEONAMES_USERNAME", "istatieh")
 
 model = model_load("classifer.cfl")
 vectorier = load_vectorier("data.csv")
 
-# Download necessary NLTK data
 nltk.download("stopwords")
 nltk.download("punkt")
 
-# Load SpaCy model
 nlp = spacy.load("en_core_web_sm")
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# Function for text preprocessing and NER
 def text_processing(input_text):
     input_text = re.sub(r"http\S+|www\S+|https\S+", " ", input_text, flags=re.MULTILINE)
     input_text = re.sub(r"#\s+(\w+)", r"#\1", input_text)
