@@ -32,8 +32,7 @@ This project is a web-based application designed to process text and image input
 #### **Installation and Setup**
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/iistatiehh/GeoRescue.git
    ```
 
 2. **Set Up a Virtual Environment**:
